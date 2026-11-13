@@ -39,7 +39,8 @@ export default function Sidebar() {
               </svg>
             </button>
           </div>
-          <Boton href={linkWhatsApp(mensajes.consulta)} tono="whatsapp" tamano="sm" className="min-h-[48px]">
+          <Boton href={linkWhatsApp(mensajes.consulta)} tono="whatsapp" tamano="sm" className="min-h-[48px] gap-2">
+            <Image src="/whatsapp.png" alt="" width={24} height={24} className="size-6 shrink-0" />
             Pedir por WhatsApp
           </Boton>
         </div>
