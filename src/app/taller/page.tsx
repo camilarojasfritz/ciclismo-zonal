@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BotonPedirServicio, TurnoForm, TurnoProvider } from "@/components/taller/Turno";
 import { Boton, Eyebrow } from "@/components/ui";
-import { formatearDesde, pasos, preguntas, servicios } from "@/data/taller";
+import { formatearPrecioServicio, notaServicios, pasos, preguntas, servicios } from "@/data/taller";
 
 export const metadata: Metadata = {
   title: "Taller Shimano Service Center",
@@ -63,28 +63,30 @@ export default function Taller() {
             <Eyebrow>Servicios y precios</Eyebrow>
             <h2 className={h2}>Qué hacemos</h2>
           </div>
-          <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-5">
+          <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-5">
             {servicios.map((s, i) => (
               <li key={s.nombre} className="flex flex-col gap-4 rounded-[14px] border border-linea bg-grafito p-7">
                 <span className="font-display text-[13px] font-semibold text-humo">{numero(i)}</span>
-                <h3 className="font-display text-[22px] leading-[1.1] font-extrabold uppercase">{s.nombre}</h3>
-                <ul className="flex flex-col gap-1.5 text-base text-niebla">
-                  {s.incluye.map((item) => (
-                    <li key={item} className="flex gap-2.5">
-                      <span aria-hidden="true" className="text-rojo">—</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="font-display text-xl leading-[1.15] font-extrabold break-words hyphens-auto uppercase">{s.nombre}</h3>
+                {s.incluye.length > 0 && (
+                  <ul className="flex flex-col gap-1.5 text-base text-niebla">
+                    {s.incluye.map((item) => (
+                      <li key={item} className="flex gap-2.5">
+                        <span aria-hidden="true" className="text-rojo">—</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <div className="mt-auto flex flex-col gap-0.5 border-t border-linea pt-4.5">
-                  <span className="text-[21px] font-bold tabular-nums">{formatearDesde(s.precioDesde)}</span>
-                  <span className="text-sm text-humo">Demora: {s.demora ?? "[A CONFIRMAR]"}</span>
+                  <span className="text-[26px] font-bold tabular-nums">{formatearPrecioServicio(s.precio)}</span>
+                  {s.demora && <span className="text-sm text-humo">Demora: {s.demora}</span>}
                 </div>
                 <BotonPedirServicio servicio={s.nombre} />
               </li>
             ))}
           </ul>
-          <p className="text-sm text-humo">Los repuestos se presupuestan aparte.</p>
+          <p className="text-sm text-humo">{notaServicios}</p>
         </div>
       </section>
 

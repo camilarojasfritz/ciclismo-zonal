@@ -59,11 +59,11 @@ src/
 
 - **Fotos de `public/demo/`:** son imágenes de Scott en baja resolución, usadas solo para maquetar. Hay que reemplazarlas por las oficiales que el local pueda usar como distribuidor.
 - **Fotos de `public/taller/`:** no son del local y no se conoce su licencia. Hay que confirmar que se pueden usar o cambiarlas por fotos del taller real.
-- **Taller:** servicios de ejemplo, sin precios ni demoras, y las preguntas frecuentes todavía no tienen respuesta (`src/data/taller.ts`).
+- **Taller:** los cuatro servicios y sus precios son los que pasó el local. Falta qué incluye cada uno, las demoras y las respuestas de las preguntas frecuentes (`src/data/taller.ts`).
 - **Logo:** `public/logo.png` es una captura ampliada; falta el archivo original en buena calidad.
 - **Precios, productos y servicios:** son de ejemplo (`src/data/`). Los productos salen del catálogo internacional de Scott y Syncros, no del stock del local.
 - **Filtros del catálogo:** funcionan las pestañas, la marca y el orden. Precio, stock y los filtros propios de cada categoría están dibujados pero todavía no filtran.
-- **Horarios y WhatsApp:** tomados del sitio anterior, sin confirmar (`src/lib/site.ts`).
+- **Horarios:** tomados del sitio anterior, sin confirmar (`src/lib/site.ts`). El WhatsApp sí está confirmado.
 
 ## Deploy
 

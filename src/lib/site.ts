@@ -14,9 +14,9 @@ export const site = {
   // Mapa incrustado, centrado en el local
   mapsEmbedUrl:
     "https://www.google.com/maps?q=Ciclismo+Zonal,+Marcelo+T.+de+Alvear+216,+Santa+Rosa,+La+Pampa&ll=-36.6168779,-64.2883647&z=16&hl=es&output=embed",
-  // confirmar
-  whatsapp: "5492954668450",
-  whatsappVisible: "+54 9 2954 66-8450",
+  // Número de la empresa (confirmado por el local)
+  whatsapp: "5492954522411",
+  whatsappVisible: "+54 9 2954 52-2411",
   instagram: "https://www.instagram.com/ciclismozonal/",
   facebook: "https://www.facebook.com/ciclismozonal/",
   // confirmar

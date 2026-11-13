@@ -1,62 +1,27 @@
-// Datos de EJEMPLO del taller. La lista de servicios, lo que incluye cada uno,
-// los precios, las demoras y las respuestas las define el taller
+// Servicios del taller. Nombres y precios pasados por el local (noviembre 2026):
+// son los trabajos más generales. Qué incluye cada uno, las demoras y las
+// respuestas de las preguntas frecuentes todavía faltan
 // (ver docs/08-pendientes-a-confirmar.md).
 
 export type Servicio = {
   nombre: string;
-  /** Resumen de una línea, para la home. */
-  detalle: string;
+  /** Qué incluye. Vacío = todavía no lo detalló el taller; no se muestra. */
   incluye: string[];
-  /** null = todavía sin precio cargado */
-  precioDesde: number | null;
-  /** null = todavía sin confirmar */
+  /** Precio en pesos. null = a consultar. */
+  precio: number | null;
+  /** null = sin confirmar; no se muestra. */
   demora: string | null;
 };
 
 export const servicios: Servicio[] = [
-  {
-    nombre: "Service básico",
-    detalle: "Limpieza, lubricación, ajuste de cambios y frenos.",
-    incluye: ["Limpieza y lubricación", "Ajuste de cambios y frenos", "Control de presión"],
-    precioDesde: null,
-    demora: null,
-  },
-  {
-    nombre: "Service completo",
-    detalle: "Desarme, limpieza profunda y ajuste general.",
-    incluye: ["Desarme y limpieza profunda", "Engrase de rodamientos", "Ajuste general"],
-    precioDesde: null,
-    demora: null,
-  },
-  {
-    nombre: "Puesta a punto Shimano",
-    detalle: "Ajuste fino de transmisión y frenos.",
-    incluye: ["Ajuste fino de transmisión", "Ajuste fino de frenos"],
-    precioDesde: null,
-    demora: null,
-  },
-  {
-    nombre: "Purgado de frenos hidráulicos",
-    detalle: "Purga y cambio de fluido.",
-    incluye: ["Purga del circuito", "Cambio de fluido"],
-    precioDesde: null,
-    demora: null,
-  },
-  {
-    nombre: "Centrado de ruedas",
-    detalle: "Alineado y tensado de rayos.",
-    incluye: ["Alineado de llantas", "Tensado de rayos"],
-    precioDesde: null,
-    demora: null,
-  },
-  {
-    nombre: "Armado de bicicleta",
-    detalle: "Armado completo, regulación y control final.",
-    incluye: ["Armado completo", "Regulación y control final"],
-    precioDesde: null,
-    demora: null,
-  },
+  { nombre: "Servicio Técnico Completo", incluye: [], precio: 70000, demora: null },
+  { nombre: "Servicio Técnico Profesional", incluye: [], precio: 90000, demora: null },
+  { nombre: "Servicio de Tubeless con Productos Importados", incluye: [], precio: 110000, demora: null },
+  { nombre: "Servicio de Sellantes Antipinchaduras Slime", incluye: [], precio: 50000, demora: null },
 ];
+
+/** Aclaración que acompaña a la lista de servicios. */
+export const notaServicios = "Estos son los servicios más pedidos. Para otros trabajos, consultanos.";
 
 /** Opción extra del formulario, para quien no sabe qué servicio necesita. */
 export const SERVICIO_OTRO = "Otro / no sé";
@@ -77,8 +42,8 @@ export const preguntas: { pregunta: string; respuesta: string | null }[] = [
   { pregunta: "¿Hacen presupuesto antes de trabajar?", respuesta: null },
 ];
 
-export function formatearDesde(precio: number | null): string {
-  return precio === null ? "Desde $ [PRECIO]" : `Desde $ ${precio.toLocaleString("es-AR")}`;
+export function formatearPrecioServicio(precio: number | null): string {
+  return precio === null ? "A consultar" : `$ ${precio.toLocaleString("es-AR")}`;
 }
 
 export const marcas = ["Scott", "Orbea", "Shimano", "Titan", "Leader", "Teknial"];
