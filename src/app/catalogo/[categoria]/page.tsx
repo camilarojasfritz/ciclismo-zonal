@@ -28,7 +28,7 @@ export default async function PaginaCategoria({ params }: Props) {
   return (
     <>
       <section className="relative overflow-hidden bg-[radial-gradient(ellipse_60%_90%_at_90%_0%,rgba(214,40,40,0.3)_0%,rgba(214,40,40,0)_70%)]">
-        <div aria-hidden="true" className="absolute top-[80px] -right-[1%] font-display text-[clamp(110px,17vw,250px)] leading-none font-extrabold whitespace-nowrap text-transparent select-none [-webkit-text-stroke:1.5px_#2e3035]">
+        <div aria-hidden="true" className="absolute top-[80px] -right-[1%] hidden sm:block font-display text-[clamp(110px,17vw,250px)] leading-none font-extrabold whitespace-nowrap text-transparent select-none [-webkit-text-stroke:1.5px_#2e3035]">
           {categoria.fantasma}
         </div>
         <div className="relative mx-auto flex max-w-[1320px] flex-col px-8 pt-14 pb-24">

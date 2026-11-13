@@ -24,6 +24,8 @@ export default function Catalogo({ categoria }: { categoria: Categoria }) {
   const [tipo, setTipo] = useState(todos);
   const [marcas, setMarcas] = useState<string[]>([]);
   const [orden, setOrden] = useState<Orden>("destacados");
+  // En celular los filtros arrancan cerrados, para ver los productos enseguida
+  const [filtrosAbiertos, setFiltrosAbiertos] = useState(false);
 
   const visibles = useMemo(() => {
     const lista = categoria.productos.filter(
@@ -62,6 +64,19 @@ export default function Catalogo({ categoria }: { categoria: Categoria }) {
         <p aria-live="polite" className="font-display text-xs font-bold uppercase tracking-[0.16em]">
           {visibles.length} {visibles.length === 1 ? categoria.unidad[0] : categoria.unidad[1]}
         </p>
+        <button
+          type="button"
+          onClick={() => setFiltrosAbiertos((v) => !v)}
+          aria-expanded={filtrosAbiertos}
+          aria-controls={`${id}-filtros`}
+          className="inline-flex min-h-[46px] items-center gap-2.5 rounded-[10px] border border-linea px-4 font-display text-[11px] font-bold uppercase tracking-[0.12em] text-white sm:hidden"
+        >
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d="M4 6h16M7 12h10M10 18h4" />
+          </svg>
+          {filtrosAbiertos ? "Ocultar filtros" : "Filtros"}
+          {marcas.length > 0 && <span className="rounded-full bg-rojo px-1.5 font-sans text-xs leading-[20px] tracking-normal">{marcas.length}</span>}
+        </button>
         <label htmlFor={`${id}-orden`} className="flex items-center gap-3 text-[15px] text-niebla">
           Ordenar por
           <select
@@ -77,7 +92,7 @@ export default function Catalogo({ categoria }: { categoria: Categoria }) {
       </div>
 
       <div className="mt-6 flex flex-wrap items-start gap-x-8 gap-y-7">
-        <aside aria-label="Filtros" className="flex w-full min-w-0 flex-col rounded-[14px] border border-linea bg-grafito px-5.5 py-2.5 sm:max-w-[320px] sm:flex-[1_1_230px]">
+        <aside id={`${id}-filtros`} aria-label="Filtros" className={`${filtrosAbiertos ? "flex" : "hidden"} w-full min-w-0 flex-col sm:flex rounded-[14px] border border-linea bg-grafito px-5.5 py-2.5 sm:max-w-[320px] sm:flex-[1_1_230px]`}>
           <div className="flex items-baseline justify-between gap-3 pt-2.5 pb-3">
             <h2 className="font-display text-[17px] font-extrabold uppercase">Filtros</h2>
             <button type="button" onClick={limpiar} disabled={!hayFiltros} className="min-h-11 text-sm text-niebla underline disabled:opacity-40">
