@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-negro: #0b0b0c;
+  --color-grafito: #1c1d20;
+  --color-linea: #2e3035;
+  --color-linea-suave: #232428;
+  --color-humo: #a3a6ad;
+  --color-niebla: #c9cbd0;
+  --color-tinta: #3a3c41;
+  --color-hueso: #f2f2f3;
+  --color-rojo: #d62828;
+  --color-rojo-hover: #b71f1f;
+  --color-whatsapp: #25d366;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-display: var(--font-montserrat), "Avenir Next", "Century Gothic", sans-serif;
+  --font-sans: var(--font-source-sans), "Helvetica Neue", Arial, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-marquee: marquee 36s linear infinite;
+  --animate-rise: rise 0.9s ease-out both;
+  --animate-drift: drift 18s ease-in-out infinite alternate;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes drift {
+    from { transform: scale(1.08) translateX(0); }
+    to { transform: scale(1.08) translateX(-2.5%); }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-negro);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* Secciones claras que se funden con el negro arriba y abajo */
+@utility fundido-hueso {
+  background: linear-gradient(
+    180deg,
+    #0b0b0c 0px, #3a3b3f 60px, #a9aaae 125px, #f2f2f3 200px,
+    #f2f2f3 calc(100% - 210px), #a9aaae calc(100% - 130px), #3a3b3f calc(100% - 60px), #0b0b0c 100%
+  );
+}
+@utility fundido-blanco {
+  background: linear-gradient(
+    180deg,
+    #0b0b0c 0px, #3a3b3f 60px, #a9aaae 125px, #ffffff 200px,
+    #ffffff calc(100% - 210px), #a9aaae calc(100% - 130px), #3a3b3f calc(100% - 60px), #0b0b0c 100%
+  );
+}
+/* Franja roja que se funde con el negro a los costados */
+@utility franja-roja {
+  background: linear-gradient(90deg, #0b0b0c 0%, var(--color-rojo) 26%, var(--color-rojo) 74%, #0b0b0c 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee, .animate-rise, .animate-drift { animation: none; }
 }

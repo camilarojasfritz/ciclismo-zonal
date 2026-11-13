@@ -1,6 +1,6 @@
 # Ciclismo Zonal
 
-Sitio web de ciclismo de la zona: calendario de carreras, resultados y contacto.
+Sitio web de **Ciclismo Zonal**, bicicletería y taller Shimano Service Center de Santa Rosa, La Pampa.
 
 Hecho con **Next.js** (App Router) + **TypeScript** + **Tailwind CSS**, desplegado en **Vercel**.
 
@@ -23,17 +23,32 @@ npm run dev      # levanta el sitio en http://localhost:3000
 ## Estructura
 
 ```
+public/
+├── logo.png             # Logo del local
+└── demo/                # Fotos PROVISORIAS (ver nota abajo)
 src/
-├── app/                 # Rutas (cada carpeta con page.tsx es una página)
-│   ├── layout.tsx       # Layout general: navbar + footer
-│   ├── page.tsx         # Inicio  (/)
-│   ├── calendario/      # /calendario
-│   ├── resultados/      # /resultados
-│   ├── contacto/        # /contacto
+├── app/
+│   ├── layout.tsx       # Menú lateral + barra de aviso + footer, fuentes
+│   ├── page.tsx         # Inicio (/)
+│   ├── globals.css      # Colores, tipografías y degradés (tokens de Tailwind)
 │   └── not-found.tsx    # Página 404
-├── components/          # Componentes reutilizables (Navbar, Footer)
-└── data/                # Datos de ejemplo (eventos.ts)
+├── components/
+│   ├── Sidebar.tsx      # Menú lateral
+│   ├── Footer.tsx
+│   ├── ui.tsx           # Boton, Eyebrow, Wordmark
+│   └── home/            # Secciones de la home
+├── data/                # Productos y servicios de EJEMPLO
+└── lib/
+    ├── site.ts          # Datos del local (dirección, horarios, WhatsApp)
+    └── whatsapp.ts      # Links y mensajes de WhatsApp
 ```
+
+## Pendiente antes de publicar
+
+- **Fotos de `public/demo/`:** son imágenes de Scott en baja resolución, usadas solo para maquetar. Hay que reemplazarlas por las oficiales que el local pueda usar como distribuidor.
+- **Logo:** `public/logo.png` es una captura ampliada; falta el archivo original en buena calidad.
+- **Precios, modelos y servicios:** son de ejemplo (`src/data/`).
+- **Horarios y WhatsApp:** tomados del sitio anterior, sin confirmar (`src/lib/site.ts`).
 
 ## Deploy
 
