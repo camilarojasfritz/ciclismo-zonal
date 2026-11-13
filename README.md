@@ -25,6 +25,7 @@ npm run dev      # levanta el sitio en http://localhost:3000
 ```
 public/
 ├── logo.png             # Logo del local
+├── local/               # Fotos del local
 └── demo/                # Fotos PROVISORIAS (ver nota abajo)
 src/
 ├── app/

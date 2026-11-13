@@ -8,8 +8,12 @@ export const site = {
     "Bicicletas, repuestos, accesorios e indumentaria. Taller oficial Shimano Service Center. Envíos a todo el país. Alvear 216, Santa Rosa, La Pampa.",
   direccion: "Marcelo T. de Alvear 216, Santa Rosa, La Pampa",
   direccionCorta: "M. T. de Alvear 216, Santa Rosa",
+  // Ficha del local en Google Maps
   mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Marcelo+T.+de+Alvear+216+Santa+Rosa+La+Pampa",
+    "https://www.google.com/maps/place/Ciclismo+Zonal/@-36.6168736,-64.2909396,17z/data=!3m1!4b1!4m6!3m5!1s0x95c2cd661e06f03f:0xdf35ef4c33d0fa33!8m2!3d-36.6168779!4d-64.2883647!16s%2Fg%2F11f6s827d0",
+  // Mapa incrustado, centrado en el local
+  mapsEmbedUrl:
+    "https://www.google.com/maps?q=Ciclismo+Zonal,+Marcelo+T.+de+Alvear+216,+Santa+Rosa,+La+Pampa&ll=-36.6168779,-64.2883647&z=16&hl=es&output=embed",
   // confirmar
   whatsapp: "5492954668450",
   whatsappVisible: "+54 9 2954 66-8450",
