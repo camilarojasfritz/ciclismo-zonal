@@ -33,7 +33,7 @@ export default function Hero() {
           <h1 className="font-display text-[clamp(34px,5.8vw,89px)] font-extrabold uppercase leading-[1.02] tracking-[-0.01em]">
             Rodá más
             <br />
-            <span className="text-transparent [-webkit-text-stroke:2px_#fff]">lejos.</span> Más
+            <span className="text-transparent [-webkit-text-stroke:1.25px_#fff] sm:[-webkit-text-stroke:2px_#fff]">lejos.</span> Más
             <br />
             <span className="text-rojo">rápido.</span>
           </h1>

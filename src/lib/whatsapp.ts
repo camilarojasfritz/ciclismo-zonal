@@ -11,4 +11,32 @@ export const mensajes = {
   turno: "¡Hola Ciclismo Zonal! Quiero pedir un turno para el taller.",
   producto: (nombre: string) =>
     `¡Hola Ciclismo Zonal! Quería consultar por este producto: ${nombre}`,
+  buscando: (texto: string) => `¡Hola Ciclismo Zonal! Estoy buscando: ${texto}. ¿Lo tienen?`,
 };
+
+export type DatosPedido = {
+  nombre: string;
+  entrega: "retiro" | "envio";
+  localidad: string;
+  comentario: string;
+};
+
+/** Arma el texto del pedido con todos los productos del carrito. */
+export function armarMensajePedido(
+  items: { nombre: string; cantidad: number }[],
+  datos: DatosPedido,
+): string {
+  const lineas = [
+    "¡Hola Ciclismo Zonal! Quiero hacer este pedido:",
+    "",
+    ...items.map((i, n) => `${n + 1}) ${i.nombre} × ${i.cantidad}`),
+    "",
+    `Nombre: ${datos.nombre.trim() || "—"}`,
+    datos.entrega === "retiro"
+      ? "Entrega: retiro en el local"
+      : `Entrega: envío a ${datos.localidad.trim() || "—"}`,
+  ];
+  if (datos.comentario.trim()) lineas.push(`Comentario: ${datos.comentario.trim()}`);
+  lineas.push("", "¿Me confirman precio y disponibilidad?");
+  return lineas.join("\n");
+}

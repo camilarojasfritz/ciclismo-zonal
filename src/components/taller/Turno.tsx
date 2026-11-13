@@ -39,7 +39,7 @@ function leerDia(valor: string): { texto: string; domingo: boolean } | null {
   if (!anio || !mes || !dia) return null;
   const fecha = new Date(anio, mes - 1, dia);
   return {
-    texto: fecha.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "numeric" }),
+    texto: `${fecha.toLocaleDateString("es-AR", { weekday: "long" })} ${dia}/${mes}`,
     domingo: fecha.getDay() === 0,
   };
 }

@@ -17,7 +17,7 @@ export default function NavLinks({ pathname: fijo }: { pathname?: string }) {
             key={item.label}
             href={item.href}
             aria-current={activo ? "page" : undefined}
-            className={`block border-l-[3px] py-2 pl-3.5 font-display text-sm font-semibold uppercase tracking-[0.14em] transition-colors hover:text-white ${
+            className={`block border-l-[3px] py-3 pl-3.5 font-display text-lg font-semibold lg:py-2 lg:text-sm uppercase tracking-[0.14em] transition-colors hover:text-white ${
               activo ? "border-rojo text-white" : "border-transparent text-niebla"
             }`}
           >
@@ -37,7 +37,7 @@ export function NavLinksBase() {
         <Link
           key={item.label}
           href={item.href}
-          className="block border-l-[3px] border-transparent py-2 pl-3.5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-niebla"
+          className="block border-l-[3px] border-transparent py-3 pl-3.5 font-display text-lg font-semibold lg:py-2 lg:text-sm uppercase tracking-[0.14em] text-niebla"
         >
           {item.label}
         </Link>

@@ -2,48 +2,45 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { linkWhatsApp, mensajes } from "@/lib/whatsapp";
+import BarraBusqueda from "./buscar/BarraBusqueda";
+import CarritoBoton from "./carrito/CarritoBoton";
+import MenuMovil from "./MenuMovil";
 import NavLinks, { NavLinksBase } from "./NavLinks";
 import { Boton, Wordmark } from "./ui";
 
-const botonIcono =
-  "flex size-[46px] items-center justify-center rounded-[10px] border border-linea text-white transition-colors hover:border-white";
+const botonCarrito =
+  "flex min-h-[46px] items-center justify-center gap-2.5 rounded-[10px] border border-linea px-3.5 font-display text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:border-white";
 
+/** Menú del sitio: columna fija en compu, botón de tres líneas en celular (ver MenuMovil). */
 export default function Sidebar() {
   return (
-    <header className="border-b border-linea-suave bg-negro lg:w-[236px] lg:shrink-0 lg:border-r lg:border-b-0">
-      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-3 lg:sticky lg:top-0 lg:h-dvh lg:max-h-[820px] lg:flex-col lg:flex-nowrap lg:items-stretch lg:p-7">
-        <Link href="/" aria-label="Ciclismo Zonal, inicio" className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2.5">
-          <Image src="/logo.png" alt="" width={84} height={84} priority className="size-14 rounded-full object-cover lg:size-[84px]" />
+    <MenuMovil
+      logo={
+        <Link href="/" aria-label="Ciclismo Zonal, inicio" className="flex items-center gap-3">
+          <Image src="/logo.png" alt="" width={48} height={48} priority className="size-12 rounded-full object-cover" />
           <Wordmark />
         </Link>
+      }
+    >
+      <Link href="/" aria-label="Ciclismo Zonal, inicio" className="hidden flex-col items-start gap-2.5 lg:flex">
+        <Image src="/logo.png" alt="" width={84} height={84} priority className="size-[84px] rounded-full object-cover" />
+        <Wordmark />
+      </Link>
 
-        <nav aria-label="Principal" className="order-last flex w-full flex-wrap gap-x-5 lg:order-none lg:w-auto lg:flex-col">
-          <Suspense fallback={<NavLinksBase />}>
-            <NavLinks />
-          </Suspense>
-        </nav>
+      <nav aria-label="Principal" className="flex flex-col">
+        <Suspense fallback={<NavLinksBase />}>
+          <NavLinks />
+        </Suspense>
+      </nav>
 
-        <div className="flex items-center gap-2.5 lg:flex-col lg:items-stretch lg:gap-3">
-          <div className="flex gap-2.5">
-            <button type="button" aria-label="Buscar" className={botonIcono}>
-              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <circle cx="11" cy="11" r="7" />
-                <path d="M20 20l-3.5-3.5" />
-              </svg>
-            </button>
-            <button type="button" aria-label="Abrir carrito" className={botonIcono}>
-              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 4h2l2.4 11h10.2L20 7H6.2" />
-                <circle cx="9" cy="19" r="1.5" />
-                <circle cx="17" cy="19" r="1.5" />
-              </svg>
-            </button>
-          </div>
-          <Boton href={linkWhatsApp(mensajes.consulta)} tono="whatsapp" tamano="sm" className="min-h-[48px]">
-            Pedir por WhatsApp
-          </Boton>
-        </div>
+      <div className="flex flex-col gap-3">
+        <BarraBusqueda />
+        <CarritoBoton className={botonCarrito} />
+        <Boton href={linkWhatsApp(mensajes.consulta)} tono="whatsapp" tamano="sm" className="min-h-[48px] gap-2">
+          <Image src="/whatsapp.png" alt="" width={24} height={24} className="size-6 shrink-0" />
+          Pedir por WhatsApp
+        </Boton>
       </div>
-    </header>
+    </MenuMovil>
   );
 }

@@ -12,7 +12,7 @@ export function ModeloDestacado() {
   return (
     <section className="px-4 pt-6 pb-22 sm:px-8">
       <div className="relative mx-auto max-w-[1256px] overflow-hidden rounded-[20px] bg-hueso text-negro">
-        <div aria-hidden="true" className="absolute top-1/2 -right-[2%] -translate-y-1/2 font-display text-[clamp(120px,18vw,264px)] leading-none font-extrabold tracking-[-0.02em] whitespace-nowrap text-[#e3e3e6] select-none">
+        <div aria-hidden="true" className="absolute top-1/2 -right-[2%] hidden sm:block -translate-y-1/2 font-display text-[clamp(120px,18vw,264px)] leading-none font-extrabold tracking-[-0.02em] whitespace-nowrap text-[#e3e3e6] select-none">
           FOIL
         </div>
         <div className="relative flex flex-wrap items-center gap-x-14 gap-y-10 px-[clamp(24px,4.5vw,64px)] py-[clamp(32px,5vw,76px)]">

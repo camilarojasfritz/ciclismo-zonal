@@ -33,7 +33,7 @@ export function Taller() {
         <div className="flex min-w-0 flex-[1.2_1_480px] flex-col">
           <ol>
             {servicios.map((s, i) => (
-              <li key={s.nombre} className="flex items-baseline gap-5.5 border-t border-linea py-6">
+              <li key={s.nombre} className="flex flex-wrap items-baseline gap-x-5.5 gap-y-2 border-t border-linea py-6">
                 <span className="w-[30px] flex-none font-display text-[13px] font-semibold text-humo">
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -41,7 +41,7 @@ export function Taller() {
                   <h3 className="font-display text-[22px] leading-[1.1] font-bold uppercase">{s.nombre}</h3>
                   <span className="text-sm text-humo">{s.detalle}</span>
                 </div>
-                <span className="flex-none text-[15px] font-semibold whitespace-nowrap">
+                <span className="w-full flex-none pl-[52px] text-[15px] font-semibold whitespace-nowrap sm:w-auto sm:pl-0">
                   {formatearDesde(s.precioDesde)}
                 </span>
               </li>

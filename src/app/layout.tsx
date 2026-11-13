@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   description: site.descripcion,
 };
 
+// En celular la barra muestra solo el primer mensaje, para que entre en una línea
+const [avisoCorto, ...restoAviso] = site.aviso.split(" · ");
+const avisoResto = restoAviso.join(" · ");
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={`${montserrat.variable} ${sourceSans.variable} antialiased`}>
@@ -25,7 +29,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Sidebar />
           <div className="min-w-0 flex-1 overflow-x-clip">
             <div className="franja-roja px-4 py-2 text-center font-display text-[11px] font-semibold uppercase tracking-[0.2em]">
-              {site.aviso}
+              {avisoCorto}
+              <span className="hidden sm:inline"> · {avisoResto}</span>
             </div>
             <main>{children}</main>
             <Footer />

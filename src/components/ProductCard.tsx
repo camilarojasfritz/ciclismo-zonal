@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { PRECIO_PENDIENTE, type Producto } from "@/data/catalogo";
 import { linkWhatsApp, mensajes } from "@/lib/whatsapp";
+import BotonAgregar from "./carrito/BotonAgregar";
 import { Boton } from "./ui";
 
 /** Tarjeta clara de producto, pensada para ir sobre el fondo negro. */
@@ -33,9 +34,13 @@ export default function ProductCard({ producto: p, sizes }: { producto: Producto
         <h3 className="font-display text-lg leading-[1.15] font-bold uppercase">{p.nombre}</h3>
         <div className="mt-auto flex items-center justify-between gap-3 pt-4.5">
           <span className="text-[21px] font-bold tabular-nums">{PRECIO_PENDIENTE}</span>
-          <Boton href={linkWhatsApp(mensajes.producto(`${p.marca} ${p.nombre}`))} tono="negro" tamano="sm">
-            {p.accion}
-          </Boton>
+          {p.accion === "Agregar" ? (
+            <BotonAgregar slug={p.slug} nombre={`${p.marca} ${p.nombre}`} />
+          ) : (
+            <Boton href={linkWhatsApp(mensajes.producto(`${p.marca} ${p.nombre}`))} tono="negro" tamano="sm">
+              {p.accion}
+            </Boton>
+          )}
         </div>
       </div>
     </article>
