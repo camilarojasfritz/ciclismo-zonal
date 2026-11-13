@@ -15,7 +15,7 @@ Que cualquier persona sepa **cómo comunicarse y cómo llegar** en segundos. Wha
 ### 2. Canales (tarjetas grandes)
 | Canal | Dato | Acción |
 | --- | --- | --- |
-| WhatsApp | +54 9 2954 66-8450 **[validar]** | `Escribinos` → `wa.me` |
+| WhatsApp | +54 9 2954 52-2411 | `Escribinos` → `wa.me` |
 | Teléfono | **[PENDIENTE]** fijo, si tienen | `tel:` |
 | Email | **[PENDIENTE]** confirmar casilla | `mailto:` |
 | Instagram | @ciclismozonal | Link al perfil |

@@ -6,7 +6,7 @@ Checklist para la reunión con Ciclismo Zonal. A medida que se resuelva, se anot
 | # | Pregunta | Respuesta |
 | --- | --- | --- |
 | 1 | Horarios exactos de atención (lunes a viernes y sábados). Las fuentes publicadas no coinciden. | |
-| 2 | WhatsApp de ventas: ¿+54 9 2954 66-8450? ¿El taller usa otro número? | |
+| 2 | WhatsApp de ventas: ¿+54 9 2954 66-8450? ¿El taller usa otro número? | Confirmado: +54 9 2954 52-2411 (número de la empresa). |
 | 3 | ¿Hay teléfono fijo? ¿Qué email publicamos? | |
 | 4 | Dominio: ¿se sigue usando `ciclismozonal.com.ar`? ¿Quién lo administra y dónde está hosteado el sitio actual? | |
 | 5 | ¿Tienen Google Business Profile? ¿Quién tiene acceso? | |

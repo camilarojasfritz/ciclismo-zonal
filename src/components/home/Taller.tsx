@@ -1,5 +1,5 @@
 import { Boton, Eyebrow } from "@/components/ui";
-import { formatearDesde, marcas, servicios } from "@/data/taller";
+import { formatearPrecioServicio, marcas, notaServicios, servicios } from "@/data/taller";
 
 export function Taller() {
   return (
@@ -39,15 +39,14 @@ export function Taller() {
                 </span>
                 <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                   <h3 className="font-display text-[22px] leading-[1.1] font-bold uppercase">{s.nombre}</h3>
-                  <span className="text-sm text-humo">{s.detalle}</span>
                 </div>
                 <span className="w-full flex-none pl-[52px] text-[15px] font-semibold whitespace-nowrap sm:w-auto sm:pl-0">
-                  {formatearDesde(s.precioDesde)}
+                  {formatearPrecioServicio(s.precio)}
                 </span>
               </li>
             ))}
           </ol>
-          <p className="border-t border-linea pt-4 text-[13px] text-humo">Los repuestos se presupuestan aparte.</p>
+          <p className="border-t border-linea pt-4 text-[13px] text-humo">{notaServicios}</p>
         </div>
       </div>
     </section>
