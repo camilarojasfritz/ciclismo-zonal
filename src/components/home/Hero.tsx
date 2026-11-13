@@ -42,7 +42,7 @@ export default function Hero() {
             el respaldo de gente que vive el ciclismo.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Boton href="/#catalogo" tamano="lg">
+            <Boton href="/catalogo/bicicletas" tamano="lg">
               Explorar catálogo <FlechaIcono />
             </Boton>
             <Boton href="/#taller" tono="bordeClaro" tamano="lg">

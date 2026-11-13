@@ -28,26 +28,32 @@ public/
 └── demo/                # Fotos PROVISORIAS (ver nota abajo)
 src/
 ├── app/
-│   ├── layout.tsx       # Menú lateral + barra de aviso + footer, fuentes
-│   ├── page.tsx         # Inicio (/)
-│   ├── globals.css      # Colores, tipografías y degradés (tokens de Tailwind)
-│   └── not-found.tsx    # Página 404
+│   ├── layout.tsx                  # Menú lateral + barra de aviso + footer, fuentes
+│   ├── page.tsx                    # Inicio (/)
+│   ├── catalogo/[categoria]/       # /catalogo/bicicletas, /repuestos, /accesorios, /indumentaria
+│   ├── globals.css                 # Colores y tipografías (tokens de Tailwind)
+│   └── not-found.tsx               # Página 404
 ├── components/
-│   ├── Sidebar.tsx      # Menú lateral
+│   ├── Sidebar.tsx, NavLinks.tsx   # Menú lateral
 │   ├── Footer.tsx
-│   ├── ui.tsx           # Boton, Eyebrow, Wordmark
-│   └── home/            # Secciones de la home
-├── data/                # Productos y servicios de EJEMPLO
+│   ├── ProductCard.tsx             # Tarjeta de producto
+│   ├── ui.tsx                      # Boton, Eyebrow, Wordmark
+│   ├── home/                       # Secciones de la home
+│   └── catalogo/Catalogo.tsx       # Pestañas, filtros y grilla
+├── data/
+│   ├── catalogo.ts                 # Categorías y productos de EJEMPLO
+│   └── taller.ts                   # Servicios de EJEMPLO
 └── lib/
-    ├── site.ts          # Datos del local (dirección, horarios, WhatsApp)
-    └── whatsapp.ts      # Links y mensajes de WhatsApp
+    ├── site.ts                     # Datos del local (dirección, horarios, WhatsApp)
+    └── whatsapp.ts                 # Links y mensajes de WhatsApp
 ```
 
 ## Pendiente antes de publicar
 
 - **Fotos de `public/demo/`:** son imágenes de Scott en baja resolución, usadas solo para maquetar. Hay que reemplazarlas por las oficiales que el local pueda usar como distribuidor.
 - **Logo:** `public/logo.png` es una captura ampliada; falta el archivo original en buena calidad.
-- **Precios, modelos y servicios:** son de ejemplo (`src/data/`).
+- **Precios, productos y servicios:** son de ejemplo (`src/data/`). Los productos salen del catálogo internacional de Scott y Syncros, no del stock del local.
+- **Filtros del catálogo:** funcionan las pestañas, la marca y el orden. Precio, stock y los filtros propios de cada categoría están dibujados pero todavía no filtran.
 - **Horarios y WhatsApp:** tomados del sitio anterior, sin confirmar (`src/lib/site.ts`).
 
 ## Deploy

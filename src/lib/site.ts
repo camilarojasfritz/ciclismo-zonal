@@ -24,11 +24,11 @@ export const site = {
 } as const;
 
 export const navegacion = [
-  { href: "/#inicio", label: "Inicio" },
-  { href: "/#catalogo", label: "Bicicletas" },
-  { href: "/#catalogo", label: "Repuestos" },
-  { href: "/#catalogo", label: "Accesorios" },
-  { href: "/#catalogo", label: "Indumentaria" },
+  { href: "/", label: "Inicio" },
+  { href: "/catalogo/bicicletas", label: "Bicicletas" },
+  { href: "/catalogo/repuestos", label: "Repuestos" },
+  { href: "/catalogo/accesorios", label: "Accesorios" },
+  { href: "/catalogo/indumentaria", label: "Indumentaria" },
   { href: "/#taller", label: "Taller" },
   { href: "/#contacto", label: "Contacto" },
 ] as const;

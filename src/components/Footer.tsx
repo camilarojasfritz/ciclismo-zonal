@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { categorias } from "@/data/catalogo";
 import { site } from "@/lib/site";
 import { linkWhatsApp } from "@/lib/whatsapp";
 import { Wordmark } from "./ui";
@@ -19,8 +20,8 @@ export default function Footer() {
           </div>
           <nav aria-label="Tienda" className="flex flex-col text-[15px] text-niebla">
             <strong className={titulo}>Tienda</strong>
-            {["Bicicletas", "Repuestos", "Accesorios", "Indumentaria"].map((c) => (
-              <Link key={c} href="/#catalogo" className={link}>{c}</Link>
+            {categorias.map((c) => (
+              <Link key={c.slug} href={`/catalogo/${c.slug}`} className={link}>{c.titulo}</Link>
             ))}
           </nav>
           <nav aria-label="Taller" className="flex flex-col text-[15px] text-niebla">

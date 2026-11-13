@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { navegacion } from "@/lib/site";
+import { Suspense } from "react";
 import { linkWhatsApp, mensajes } from "@/lib/whatsapp";
+import NavLinks, { NavLinksBase } from "./NavLinks";
 import { Boton, Wordmark } from "./ui";
 
 const botonIcono =
@@ -11,23 +12,15 @@ export default function Sidebar() {
   return (
     <header className="border-b border-linea-suave bg-negro lg:w-[236px] lg:shrink-0 lg:border-r lg:border-b-0">
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-3 lg:sticky lg:top-0 lg:h-dvh lg:max-h-[820px] lg:flex-col lg:flex-nowrap lg:items-stretch lg:p-7">
-        <Link href="/#inicio" aria-label="Ciclismo Zonal, inicio" className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2.5">
+        <Link href="/" aria-label="Ciclismo Zonal, inicio" className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2.5">
           <Image src="/logo.png" alt="" width={84} height={84} priority className="size-14 rounded-full object-cover lg:size-[84px]" />
           <Wordmark />
         </Link>
 
         <nav aria-label="Principal" className="order-last flex w-full flex-wrap gap-x-5 lg:order-none lg:w-auto lg:flex-col">
-          {navegacion.map((item, i) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`block border-l-[3px] py-2 pl-3.5 font-display text-sm font-semibold uppercase tracking-[0.14em] transition-colors hover:text-white ${
-                i === 0 ? "border-rojo text-white" : "border-transparent text-niebla"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+          <Suspense fallback={<NavLinksBase />}>
+            <NavLinks />
+          </Suspense>
         </nav>
 
         <div className="flex items-center gap-2.5 lg:flex-col lg:items-stretch lg:gap-3">
