@@ -32,6 +32,8 @@ src/
 │   ├── layout.tsx                  # Menú lateral + barra de aviso + footer, fuentes
 │   ├── page.tsx                    # Inicio (/)
 │   ├── catalogo/[categoria]/       # /catalogo/bicicletas, /repuestos, /accesorios, /indumentaria
+│   ├── buscar/                     # /buscar: buscador de productos
+│   ├── carrito/                    # /carrito: pedido completo que se envía por WhatsApp
 │   ├── taller/                     # /taller: servicios, pasos, pedido de turno y preguntas
 │   ├── globals.css                 # Colores y tipografías (tokens de Tailwind)
 │   └── not-found.tsx               # Página 404
@@ -48,6 +50,8 @@ src/
 │   └── taller.ts                   # Servicios de EJEMPLO
 └── lib/
     ├── site.ts                     # Datos del local (dirección, horarios, WhatsApp)
+    ├── buscar.ts                   # Búsqueda sobre el catálogo
+    ├── carrito.ts                  # Carrito guardado en el navegador (localStorage)
     └── whatsapp.ts                 # Links y mensajes de WhatsApp
 ```
 
