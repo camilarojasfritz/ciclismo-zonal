@@ -26,9 +26,9 @@ export default function Footer() {
           </nav>
           <nav aria-label="Taller" className="flex flex-col text-[15px] text-niebla">
             <strong className={titulo}>Taller</strong>
-            {["Servicios y precios", "Pedir turno", "Shimano Service Center"].map((c) => (
-              <Link key={c} href="/#taller" className={link}>{c}</Link>
-            ))}
+            <Link href="/taller#servicios" className={link}>Servicios y precios</Link>
+            <Link href="/taller#turno" className={link}>Pedir turno</Link>
+            <Link href="/taller" className={link}>Shimano Service Center</Link>
           </nav>
           <div className="flex flex-col text-[15px] text-niebla">
             <strong className={titulo}>Contacto</strong>

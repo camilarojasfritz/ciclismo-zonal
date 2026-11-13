@@ -33,6 +33,6 @@ export const navegacion = [
   { href: "/catalogo/repuestos", label: "Repuestos" },
   { href: "/catalogo/accesorios", label: "Accesorios" },
   { href: "/catalogo/indumentaria", label: "Indumentaria" },
-  { href: "/#taller", label: "Taller" },
+  { href: "/taller", label: "Taller" },
   { href: "/#contacto", label: "Contacto" },
 ] as const;

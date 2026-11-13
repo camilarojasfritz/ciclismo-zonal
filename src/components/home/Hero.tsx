@@ -45,7 +45,7 @@ export default function Hero() {
             <Boton href="/catalogo/bicicletas" tamano="lg">
               Explorar catálogo <FlechaIcono />
             </Boton>
-            <Boton href="/#taller" tono="bordeClaro" tamano="lg">
+            <Boton href="/taller#turno" tono="bordeClaro" tamano="lg">
               Pedir turno en el taller
             </Boton>
           </div>

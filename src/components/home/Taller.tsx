@@ -1,6 +1,5 @@
 import { Boton, Eyebrow } from "@/components/ui";
-import { marcas, servicios } from "@/data/taller";
-import { linkWhatsApp, mensajes } from "@/lib/whatsapp";
+import { formatearDesde, marcas, servicios } from "@/data/taller";
 
 export function Taller() {
   return (
@@ -22,9 +21,12 @@ export function Taller() {
             Diagnóstico, mantenimiento y puesta a punto con repuestos originales. Pedí tu turno,
             traé la bici y te avisamos cuando está lista.
           </p>
-          <div className="mt-2">
-            <Boton href={linkWhatsApp(mensajes.turno)} tono="whatsapp" tamano="lg">
-              Pedir turno por WhatsApp
+          <div className="mt-2 flex flex-wrap gap-3.5">
+            <Boton href="/taller#turno" tono="whatsapp" tamano="lg">
+              Pedir turno
+            </Boton>
+            <Boton href="/taller" tono="bordeClaro" tamano="lg">
+              Servicios y precios
             </Boton>
           </div>
         </div>
@@ -40,7 +42,7 @@ export function Taller() {
                   <span className="text-sm text-humo">{s.detalle}</span>
                 </div>
                 <span className="flex-none text-[15px] font-semibold whitespace-nowrap">
-                  Desde {s.precioDesde === null ? "$ [PRECIO]" : `$ ${s.precioDesde.toLocaleString("es-AR")}`}
+                  {formatearDesde(s.precioDesde)}
                 </span>
               </li>
             ))}
