@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-import { linkWhatsApp, mensajes } from "@/lib/whatsapp";
 import BarraBusqueda from "./buscar/BarraBusqueda";
+import BotonPedirWhatsApp from "./carrito/BotonPedirWhatsApp";
 import CarritoBoton from "./carrito/CarritoBoton";
 import MenuMovil from "./MenuMovil";
 import NavLinks, { NavLinksBase } from "./NavLinks";
-import { Boton, Wordmark } from "./ui";
+import { Wordmark } from "./ui";
 
 const botonCarrito =
   "flex min-h-[46px] items-center justify-center gap-2.5 rounded-[10px] border border-linea px-3.5 font-display text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:border-white";
@@ -36,10 +36,7 @@ export default function Sidebar() {
       <div className="flex flex-col gap-3">
         <BarraBusqueda />
         <CarritoBoton className={botonCarrito} />
-        <Boton href={linkWhatsApp(mensajes.consulta)} tono="whatsapp" tamano="sm" className="min-h-[48px] gap-2">
-          <Image src="/whatsapp.png" alt="" width={24} height={24} className="size-6 shrink-0" />
-          Pedir por WhatsApp
-        </Boton>
+        <BotonPedirWhatsApp />
       </div>
     </MenuMovil>
   );

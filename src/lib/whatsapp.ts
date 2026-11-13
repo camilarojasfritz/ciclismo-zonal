@@ -21,22 +21,29 @@ export type DatosPedido = {
   comentario: string;
 };
 
-/** Arma el texto del pedido con todos los productos del carrito. */
+/**
+ * Arma el texto del pedido con todos los productos del carrito.
+ * Sin `datos` (pedido rápido desde el menú) lleva solo la lista de productos.
+ */
 export function armarMensajePedido(
   items: { nombre: string; cantidad: number }[],
-  datos: DatosPedido,
+  datos?: DatosPedido,
 ): string {
   const lineas = [
     "¡Hola Ciclismo Zonal! Quiero hacer este pedido:",
     "",
     ...items.map((i, n) => `${n + 1}) ${i.nombre} × ${i.cantidad}`),
-    "",
-    `Nombre: ${datos.nombre.trim() || "—"}`,
-    datos.entrega === "retiro"
-      ? "Entrega: retiro en el local"
-      : `Entrega: envío a ${datos.localidad.trim() || "—"}`,
   ];
-  if (datos.comentario.trim()) lineas.push(`Comentario: ${datos.comentario.trim()}`);
+  if (datos) {
+    lineas.push(
+      "",
+      `Nombre: ${datos.nombre.trim() || "—"}`,
+      datos.entrega === "retiro"
+        ? "Entrega: retiro en el local"
+        : `Entrega: envío a ${datos.localidad.trim() || "—"}`,
+    );
+    if (datos.comentario.trim()) lineas.push(`Comentario: ${datos.comentario.trim()}`);
+  }
   lineas.push("", "¿Me confirman precio y disponibilidad?");
   return lineas.join("\n");
 }
