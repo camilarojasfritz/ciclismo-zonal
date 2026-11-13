@@ -1,6 +1,6 @@
 # Ciclismo Zonal
 
-Sitio web de ciclismo de la zona: calendario de carreras, resultados y contacto.
+Sitio web de **Ciclismo Zonal**, bicicletería y taller Shimano Service Center de Santa Rosa, La Pampa.
 
 Hecho con **Next.js** (App Router) + **TypeScript** + **Tailwind CSS**, desplegado en **Vercel**.
 
@@ -23,17 +23,43 @@ npm run dev      # levanta el sitio en http://localhost:3000
 ## Estructura
 
 ```
+public/
+├── logo.png             # Logo del local
+├── local/               # Fotos del local
+└── demo/                # Fotos PROVISORIAS (ver nota abajo)
 src/
-├── app/                 # Rutas (cada carpeta con page.tsx es una página)
-│   ├── layout.tsx       # Layout general: navbar + footer
-│   ├── page.tsx         # Inicio  (/)
-│   ├── calendario/      # /calendario
-│   ├── resultados/      # /resultados
-│   ├── contacto/        # /contacto
-│   └── not-found.tsx    # Página 404
-├── components/          # Componentes reutilizables (Navbar, Footer)
-└── data/                # Datos de ejemplo (eventos.ts)
+├── app/
+│   ├── layout.tsx                  # Menú lateral + barra de aviso + footer, fuentes
+│   ├── page.tsx                    # Inicio (/)
+│   ├── catalogo/[categoria]/       # /catalogo/bicicletas, /repuestos, /accesorios, /indumentaria
+│   ├── taller/                     # /taller: servicios, pasos, pedido de turno y preguntas
+│   ├── globals.css                 # Colores y tipografías (tokens de Tailwind)
+│   └── not-found.tsx               # Página 404
+├── components/
+│   ├── Sidebar.tsx, NavLinks.tsx   # Menú lateral
+│   ├── Footer.tsx
+│   ├── ProductCard.tsx             # Tarjeta de producto
+│   ├── ui.tsx                      # Boton, Eyebrow, Wordmark
+│   ├── home/                       # Secciones de la home
+│   ├── catalogo/Catalogo.tsx       # Pestañas, filtros y grilla
+│   └── taller/Turno.tsx            # Formulario de turno que arma el mensaje de WhatsApp
+├── data/
+│   ├── catalogo.ts                 # Categorías y productos de EJEMPLO
+│   └── taller.ts                   # Servicios de EJEMPLO
+└── lib/
+    ├── site.ts                     # Datos del local (dirección, horarios, WhatsApp)
+    └── whatsapp.ts                 # Links y mensajes de WhatsApp
 ```
+
+## Pendiente antes de publicar
+
+- **Fotos de `public/demo/`:** son imágenes de Scott en baja resolución, usadas solo para maquetar. Hay que reemplazarlas por las oficiales que el local pueda usar como distribuidor.
+- **Fotos de `public/taller/`:** no son del local y no se conoce su licencia. Hay que confirmar que se pueden usar o cambiarlas por fotos del taller real.
+- **Taller:** servicios de ejemplo, sin precios ni demoras, y las preguntas frecuentes todavía no tienen respuesta (`src/data/taller.ts`).
+- **Logo:** `public/logo.png` es una captura ampliada; falta el archivo original en buena calidad.
+- **Precios, productos y servicios:** son de ejemplo (`src/data/`). Los productos salen del catálogo internacional de Scott y Syncros, no del stock del local.
+- **Filtros del catálogo:** funcionan las pestañas, la marca y el orden. Precio, stock y los filtros propios de cada categoría están dibujados pero todavía no filtran.
+- **Horarios y WhatsApp:** tomados del sitio anterior, sin confirmar (`src/lib/site.ts`).
 
 ## Deploy
 
