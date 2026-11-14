@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useId, useState } from "react";
+import { formatearPrecio } from "@/data/catalogo";
 import { cambiarCantidad, quitar, useCarrito, vaciar } from "@/lib/carrito";
 import { armarMensajePedido, linkWhatsApp, type DatosPedido } from "@/lib/whatsapp";
 
@@ -41,7 +42,11 @@ export default function Pedido() {
     datos.entrega === "envio" && !datos.localidad.trim() && "la localidad de envío",
   ].filter(Boolean) as string[];
   const mensaje = armarMensajePedido(
-    items.map((i) => ({ nombre: `${i.producto.marca} ${i.producto.nombre}`, cantidad: i.cantidad })),
+    items.map((i) => ({
+        nombre: `${i.producto.marca} ${i.producto.nombre}`,
+        cantidad: i.cantidad,
+        precio: i.producto.precio === null ? undefined : formatearPrecio(i.producto.precio),
+      })),
     datos,
   );
 
@@ -57,8 +62,12 @@ export default function Pedido() {
               <span className="text-xs font-semibold uppercase tracking-[0.18em] text-humo">
                 {p.marca} · {p.linea}
               </span>
-              <span className="font-display text-lg leading-[1.15] font-bold uppercase">{p.nombre}</span>
-              <span className="text-sm text-niebla">Precio a confirmar</span>
+              <Link href={`/producto/${p.slug}`} className="font-display text-lg leading-[1.15] font-bold uppercase hover:text-rojo">
+                {p.nombre}
+              </Link>
+              <span className="text-sm text-niebla">
+                {p.precio === null ? "Precio a confirmar" : `${formatearPrecio(p.precio)} c/u`}
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <button type="button" className={paso} onClick={() => cambiarCantidad(p.slug, cantidad - 1)} disabled={cantidad <= 1} aria-label={`Quitar una unidad de ${p.nombre}`}>
