@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { formatearPrecio } from "@/data/catalogo";
 import { useCarrito } from "@/lib/carrito";
 import { armarMensajePedido, linkWhatsApp, mensajes } from "@/lib/whatsapp";
 
@@ -12,7 +13,11 @@ export default function BotonPedirWhatsApp() {
   const { items, unidades } = useCarrito();
   const mensaje =
     items.length > 0
-      ? armarMensajePedido(items.map((i) => ({ nombre: `${i.producto.marca} ${i.producto.nombre}`, cantidad: i.cantidad })))
+      ? armarMensajePedido(items.map((i) => ({
+        nombre: `${i.producto.marca} ${i.producto.nombre}`,
+        cantidad: i.cantidad,
+        precio: i.producto.precio === null ? undefined : formatearPrecio(i.producto.precio),
+      })))
       : mensajes.consulta;
 
   return (

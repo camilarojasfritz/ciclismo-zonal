@@ -26,13 +26,13 @@ export type DatosPedido = {
  * Sin `datos` (pedido rápido desde el menú) lleva solo la lista de productos.
  */
 export function armarMensajePedido(
-  items: { nombre: string; cantidad: number }[],
+  items: { nombre: string; cantidad: number; precio?: string }[],
   datos?: DatosPedido,
 ): string {
   const lineas = [
     "¡Hola Ciclismo Zonal! Quiero hacer este pedido:",
     "",
-    ...items.map((i, n) => `${n + 1}) ${i.nombre} × ${i.cantidad}`),
+    ...items.map((i, n) => `${n + 1}) ${i.nombre} × ${i.cantidad}${i.precio ? ` — ${i.precio} c/u` : ""}`),
   ];
   if (datos) {
     lineas.push(

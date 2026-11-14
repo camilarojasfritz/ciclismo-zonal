@@ -1,6 +1,11 @@
-// Catálogo de EJEMPLO para maquetar el sitio.
-// Los productos salen del catálogo internacional de Scott / Syncros: no reflejan
-// el stock real del local. Se reemplaza por los datos del backend más adelante.
+// Catálogo del sitio.
+// - Bicicletas: modelos que vende el local (noviembre 2026). Precios y fotos de
+//   referencia tomados de Tienda Scott (tiendascott.com): confirmarlos con el local.
+// - Repuestos, accesorios e indumentaria: todavía son EJEMPLOS del catálogo
+//   internacional de Scott / Syncros, sin precio.
+// Cuando exista el panel de administración, estos datos van a salir de la base.
+
+export type Especificacion = { clave: string; valor: string };
 
 export type Producto = {
   slug: string;
@@ -14,8 +19,13 @@ export type Producto = {
   ancho: number;
   alto: number;
   alt: string;
+  /** Precio en pesos. null = todavía sin precio cargado. */
+  precio: number | null;
   accion: "Agregar" | "Consultar";
   etiqueta?: "Nuevo" | "A pedido";
+  /** Para la ficha del producto. */
+  descripcion?: string;
+  specs?: Especificacion[];
 };
 
 export type Categoria = {
@@ -27,9 +37,8 @@ export type Categoria = {
   intro: string;
   /** [singular, plural] para el contador: "1 bicicleta" / "12 bicicletas". */
   unidad: [string, string];
-  /** Pestañas; la primera es "todos". */
+  /** Pestañas posibles, en orden; la primera es "todos". Solo se muestran las que tienen productos. */
   tipos: string[];
-  marcas: string[];
   /** Filtros que todavía no filtran: faltan esos datos en los productos. */
   filtrosExtra: { titulo: string; opciones: string[] }[];
   ayuda: { titulo: [string, string]; texto: string };
@@ -42,7 +51,7 @@ export const categorias: Categoria[] = [
     "titulo": "Bicicletas",
     "numero": "01",
     "fantasma": "BIKES",
-    "intro": "Mountain bike, ruta, gravel, urbanas e infantiles. Te ayudamos a elegir el modelo y el talle.",
+    "intro": "Mountain bikes Scott para el día a día y el trail. Te ayudamos a elegir el modelo y el talle.",
     "unidad": [
       "bicicleta",
       "bicicletas"
@@ -56,21 +65,12 @@ export const categorias: Categoria[] = [
       "Infantiles",
       "E-bikes"
     ],
-    "marcas": [
-      "Scott",
-      "Orbea",
-      "Titan",
-      "Teknial"
-    ],
     "filtrosExtra": [
       {
         "titulo": "Rodado",
         "opciones": [
-          "20",
-          "26",
           "27.5",
-          "29",
-          "700c"
+          "29"
         ]
       }
     ],
@@ -83,150 +83,232 @@ export const categorias: Categoria[] = [
     },
     "productos": [
       {
-        "slug": "scott-spark-rc-sl",
-        "nombre": "Spark RC SL",
+        "slug": "scott-contrail-30",
+        "nombre": "Contrail 30",
         "marca": "Scott",
         "tipo": "Mountain Bike",
-        "linea": "Cross Country",
-        "imagen": "/demo/spark-rc-sl.jpg",
-        "ancho": 540,
-        "alto": 325,
-        "alt": "Scott Spark RC SL, mountain bike de cross country",
+        "linea": "Mountain bike",
+        "imagen": "/bicis/contrail-30.jpg",
+        "ancho": 800,
+        "alto": 500,
+        "alt": "Scott Contrail 30, mountain bike rígida verde claro, vista lateral",
+        "precio": 1740000,
         "accion": "Agregar",
-        "etiqueta": "Nuevo"
+        "descripcion": "Mountain bike rígida (hardtail), modelo 2026, pensada para quienes se inician en el cross country y el trail.",
+        "specs": [
+          {
+            "clave": "Cuadro",
+            "valor": "Aluminio 6061 Custom Butted, geometría inspirada en el trail"
+          },
+          {
+            "clave": "Horquilla",
+            "valor": "Suntour XCE28, 100 mm de recorrido"
+          },
+          {
+            "clave": "Transmisión",
+            "valor": "Shimano CUES de 9 velocidades, monoplato"
+          },
+          {
+            "clave": "Frenos",
+            "valor": "Disco hidráulicos Tektro"
+          },
+          {
+            "clave": "Cubiertas",
+            "valor": "Maxxis Rekon Race, rodado 29"
+          }
+        ]
       },
       {
-        "slug": "scott-spark-rc-world-cup-evo",
-        "nombre": "Spark RC World Cup EVO",
+        "slug": "scott-contrail-20",
+        "nombre": "Contrail 20",
         "marca": "Scott",
         "tipo": "Mountain Bike",
-        "linea": "Cross Country",
-        "imagen": "/demo/spark-rc-evo.jpg",
-        "ancho": 540,
-        "alto": 325,
-        "alt": "Scott Spark RC World Cup EVO, mountain bike blanca",
-        "accion": "Agregar"
+        "linea": "Mountain bike",
+        "imagen": "/bicis/contrail-20.jpg",
+        "ancho": 800,
+        "alto": 500,
+        "alt": "Scott Contrail 20, mountain bike rígida negra, vista lateral",
+        "precio": 2040000,
+        "accion": "Agregar",
+        "descripcion": "Mountain bike rígida de nivel inicial a intermedio, versátil para senderos recreativos y para la ciudad.",
+        "specs": [
+          {
+            "clave": "Cuadro",
+            "valor": "Aluminio 6061 con cableado interno"
+          },
+          {
+            "clave": "Horquilla",
+            "valor": "SR Suntour XCT30-HLO, 100 mm de recorrido, con bloqueo"
+          },
+          {
+            "clave": "Transmisión",
+            "valor": "Shimano CUES de 11 velocidades, monoplato 32T y cassette 11-50T"
+          },
+          {
+            "clave": "Frenos",
+            "valor": "Disco hidráulicos Tektro TKD 176, rotores de 160 mm"
+          }
+        ]
       },
       {
-        "slug": "scott-spark-rc-world-cup",
-        "nombre": "Spark RC World Cup",
+        "slug": "scott-contrail-10",
+        "nombre": "Contrail 10",
         "marca": "Scott",
         "tipo": "Mountain Bike",
-        "linea": "Cross Country",
-        "imagen": "/demo/spark-rc-wc.jpg",
-        "ancho": 334,
-        "alto": 250,
-        "alt": "Scott Spark RC World Cup, mountain bike blanca y negra",
-        "accion": "Agregar"
+        "linea": "Mountain bike",
+        "imagen": "/bicis/contrail-10.jpg",
+        "ancho": 800,
+        "alto": 500,
+        "alt": "Scott Contrail 10, mountain bike rígida celeste, vista lateral",
+        "precio": 2430000,
+        "accion": "Agregar",
+        "descripcion": "Mountain bike rígida para recorridos de trail y aventuras en la naturaleza, con horquilla RockShox y frenos Shimano.",
+        "specs": [
+          {
+            "clave": "Cuadro",
+            "valor": "Aluminio 6061 Custom Butted, cableado interno"
+          },
+          {
+            "clave": "Horquilla",
+            "valor": "RockShox Judy Silver TK, 100 mm de recorrido, con ajuste de rebote y bloqueo"
+          },
+          {
+            "clave": "Transmisión",
+            "valor": "Shimano CUES de 11 velocidades, cassette 11-50T"
+          },
+          {
+            "clave": "Frenos",
+            "valor": "Disco hidráulicos Shimano MT200, rotores de 180 mm adelante y 160 mm atrás"
+          },
+          {
+            "clave": "Cubiertas",
+            "valor": "Maxxis Rekon Race"
+          },
+          {
+            "clave": "Componentes",
+            "valor": "Syncros, manubrio de 720 mm"
+          }
+        ]
       },
       {
-        "slug": "scott-ransom-rc",
-        "nombre": "Ransom RC",
+        "slug": "scott-contessa-active-40",
+        "nombre": "Contessa Active 40",
         "marca": "Scott",
         "tipo": "Mountain Bike",
-        "linea": "Enduro",
-        "imagen": "/demo/ransom-rc.jpg",
-        "ancho": 540,
-        "alto": 325,
-        "alt": "Scott Ransom RC, mountain bike de enduro",
-        "accion": "Agregar"
+        "linea": "Mountain bike para mujer",
+        "imagen": "/bicis/contessa-active-40.jpg",
+        "ancho": 800,
+        "alto": 500,
+        "alt": "Scott Contessa Active 40, mountain bike rígida bordó para mujer, vista lateral",
+        "precio": 1316000,
+        "accion": "Agregar",
+        "descripcion": "Mountain bike rígida diseñada para la anatomía y la comodidad de la mujer. Ideal para iniciarse en el MTB y para salidas recreativas.",
+        "specs": [
+          {
+            "clave": "Cuadro",
+            "valor": "Aluminio 6061 con cableado interno"
+          },
+          {
+            "clave": "Horquilla",
+            "valor": "Suntour XCT30-HLO, 100 mm de recorrido, con bloqueo"
+          },
+          {
+            "clave": "Transmisión",
+            "valor": "Shimano Altus de 18 velocidades (2x9), cassette 11-36T"
+          },
+          {
+            "clave": "Frenos",
+            "valor": "Disco hidráulicos Tektro"
+          },
+          {
+            "clave": "Componentes",
+            "valor": "Asiento Syncros Savona 2.5 V-Concept para mujer, llantas Syncros X-20"
+          },
+          {
+            "clave": "Cubiertas",
+            "valor": "Kenda Booster"
+          }
+        ]
       },
       {
-        "slug": "scott-ransom-10",
-        "nombre": "Ransom 10",
+        "slug": "scott-aspect-960",
+        "nombre": "Aspect 960",
         "marca": "Scott",
         "tipo": "Mountain Bike",
-        "linea": "Enduro",
-        "imagen": "/demo/ransom-10.jpg",
-        "ancho": 334,
-        "alto": 250,
-        "alt": "Scott Ransom 10, mountain bike de enduro gris",
-        "accion": "Agregar"
+        "linea": "Mountain bike",
+        "imagen": "/bicis/aspect-960.jpg",
+        "ancho": 800,
+        "alto": 500,
+        "alt": "Scott Aspect 960, mountain bike rígida roja, vista lateral",
+        "precio": 1162000,
+        "accion": "Agregar",
+        "descripcion": "Mountain bike rígida rodado 29 para quienes se inician, con un buen equilibrio entre precio y calidad.",
+        "specs": [
+          {
+            "clave": "Cuadro",
+            "valor": "Aluminio con guiado interno de cables"
+          },
+          {
+            "clave": "Horquilla",
+            "valor": "Suntour XCE28, 100 mm de recorrido"
+          },
+          {
+            "clave": "Transmisión",
+            "valor": "Shimano TX800 de 16 velocidades (2x8)"
+          },
+          {
+            "clave": "Frenos",
+            "valor": "Disco hidráulicos Tektro"
+          },
+          {
+            "clave": "Componentes",
+            "valor": "Syncros"
+          },
+          {
+            "clave": "Cubiertas",
+            "valor": "Kenda Booster, rodado 29"
+          }
+        ]
       },
       {
-        "slug": "scott-foil-rc-ultimate",
-        "nombre": "Foil RC Ultimate",
+        "slug": "scott-aspect-950",
+        "nombre": "Aspect 950",
         "marca": "Scott",
-        "tipo": "Ruta",
-        "linea": "Ruta",
-        "imagen": "/demo/foil-rc.jpg",
-        "ancho": 540,
-        "alto": 325,
-        "alt": "Scott Foil RC Ultimate, bicicleta de ruta aero",
-        "accion": "Consultar",
-        "etiqueta": "A pedido"
-      },
-      {
-        "slug": "scott-foil-rc-pro",
-        "nombre": "Foil RC Pro",
-        "marca": "Scott",
-        "tipo": "Ruta",
-        "linea": "Ruta",
-        "imagen": "/demo/foil-rc-pro.jpg",
-        "ancho": 334,
-        "alto": 250,
-        "alt": "Scott Foil RC Pro, bicicleta de ruta aero",
-        "accion": "Agregar"
-      },
-      {
-        "slug": "scott-addict-10",
-        "nombre": "Addict 10",
-        "marca": "Scott",
-        "tipo": "Ruta",
-        "linea": "Ruta",
-        "imagen": "/demo/addict-10.jpg",
-        "ancho": 334,
-        "alto": 250,
-        "alt": "Scott Addict 10, bicicleta de ruta blanca",
-        "accion": "Agregar"
-      },
-      {
-        "slug": "scott-addict-gravel-10",
-        "nombre": "Addict Gravel 10",
-        "marca": "Scott",
-        "tipo": "Gravel",
-        "linea": "Gravel",
-        "imagen": "/demo/addict-gravel-10.jpg",
-        "ancho": 334,
-        "alto": 250,
-        "alt": "Scott Addict Gravel 10, bicicleta de gravel",
-        "accion": "Agregar"
-      },
-      {
-        "slug": "scott-metrix-10",
-        "nombre": "Metrix 10",
-        "marca": "Scott",
-        "tipo": "Urbanas",
-        "linea": "Urbana",
-        "imagen": "/demo/metrix-10.jpg",
-        "ancho": 334,
-        "alto": 250,
-        "alt": "Scott Metrix 10, bicicleta urbana con portaequipaje",
-        "accion": "Agregar"
-      },
-      {
-        "slug": "scott-sub-cross-10",
-        "nombre": "Sub Cross 10",
-        "marca": "Scott",
-        "tipo": "Urbanas",
-        "linea": "Urbana",
-        "imagen": "/demo/sub-cross-10.jpg",
-        "ancho": 334,
-        "alto": 250,
-        "alt": "Scott Sub Cross 10, bicicleta urbana negra",
-        "accion": "Agregar"
-      },
-      {
-        "slug": "scott-scale-rc-200",
-        "nombre": "Scale RC 200",
-        "marca": "Scott",
-        "tipo": "Infantiles",
-        "linea": "Infantil",
-        "imagen": "/demo/scale-rc-200.jpg",
-        "ancho": 334,
-        "alto": 250,
-        "alt": "Scott Scale RC 200, mountain bike infantil",
-        "accion": "Agregar"
+        "tipo": "Mountain Bike",
+        "linea": "Mountain bike",
+        "imagen": "/bicis/aspect-950.jpg",
+        "ancho": 800,
+        "alto": 500,
+        "alt": "Scott Aspect 950, mountain bike rígida gris, vista lateral",
+        "precio": 1316000,
+        "accion": "Agregar",
+        "descripcion": "Mountain bike rígida de entrada, ideal para principiantes o uso recreativo.",
+        "specs": [
+          {
+            "clave": "Cuadro",
+            "valor": "Aluminio 6061 con cableado interno"
+          },
+          {
+            "clave": "Horquilla",
+            "valor": "Suntour XCT30-HLO, 100 mm de recorrido, con bloqueo"
+          },
+          {
+            "clave": "Transmisión",
+            "valor": "Shimano Altus de 18 velocidades (2x9)"
+          },
+          {
+            "clave": "Frenos",
+            "valor": "Disco hidráulicos Tektro"
+          },
+          {
+            "clave": "Cubiertas",
+            "valor": "Kenda Booster, rodado 29"
+          },
+          {
+            "clave": "Componentes",
+            "valor": "Syncros"
+          }
+        ]
       }
     ]
   },
@@ -247,10 +329,6 @@ export const categorias: Categoria[] = [
       "Transmisión",
       "Frenos",
       "Cubiertas"
-    ],
-    "marcas": [
-      "Syncros",
-      "Shimano"
     ],
     "filtrosExtra": [
       {
@@ -280,6 +358,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros Silverton CF II, par de ruedas de carbono",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -292,6 +371,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros Capital 1.0 40, par de ruedas de ruta",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -304,6 +384,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros Capital SL Aero de 80 mm, rueda delantera",
+        "precio": null,
         "accion": "Consultar",
         "etiqueta": "A pedido"
       },
@@ -317,6 +398,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros R501-CF II, cockpit integrado de ruta",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -329,6 +411,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros iC-M100-SL1, cockpit integrado de MTB",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -341,6 +424,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros IC-R100-SL, cockpit integrado de ruta",
+        "precio": null,
         "accion": "Agregar"
       }
     ]
@@ -362,10 +446,6 @@ export const categorias: Categoria[] = [
       "Candados",
       "Hidratación",
       "Herramientas"
-    ],
-    "marcas": [
-      "Syncros",
-      "Leader"
     ],
     "filtrosExtra": [
       {
@@ -395,6 +475,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros IS Gravel Frame Bag, bolso de cuadro con anclajes",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -407,6 +488,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros Frame Pack, bolso de cuadro montado en la bici",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -419,6 +501,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros Toptube Bag, bolso para el caño superior",
+        "precio": null,
         "accion": "Agregar",
         "etiqueta": "Nuevo"
       },
@@ -432,6 +515,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros Handlebar Bag, bolso de manubrio",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -444,6 +528,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros Saddle Pack, bolso bajo asiento",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -456,6 +541,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Syncros IS Road Frame Bag, bolso de cuadro para ruta",
+        "precio": null,
         "accion": "Agregar"
       }
     ]
@@ -477,10 +563,6 @@ export const categorias: Categoria[] = [
       "Camperas",
       "Zapatillas",
       "Guantes"
-    ],
-    "marcas": [
-      "Scott",
-      "Leader"
     ],
     "filtrosExtra": [
       {
@@ -519,6 +601,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Scott Cadence Mips, casco aero negro",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -531,6 +614,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Scott Arx Mips, casco gris",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -543,6 +627,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Scott RC Pro, jersey de manga corta amarillo y blanco",
+        "precio": null,
         "accion": "Agregar",
         "etiqueta": "Nuevo"
       },
@@ -556,6 +641,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Scott Pro Cargo, jersey de manga corta gris para mujer",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -568,6 +654,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Scott Pro Waterproof, campera impermeable gris",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -580,6 +667,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Scott Road RC, zapatillas de ruta blancas",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -592,6 +680,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Scott Road Comp, zapatillas de ruta negras",
+        "precio": null,
         "accion": "Agregar"
       },
       {
@@ -604,6 +693,7 @@ export const categorias: Categoria[] = [
         "ancho": 334,
         "alto": 250,
         "alt": "Scott Ultd., guantes largos bordó",
+        "precio": null,
         "accion": "Agregar"
       }
     ]
@@ -614,16 +704,26 @@ export function buscarCategoria(slug: string): Categoria | undefined {
   return categorias.find((c) => c.slug === slug);
 }
 
-/** Productos que se muestran en la home. */
-const slugsDestacados = [
-  "scott-spark-rc-sl",
-  "scott-spark-rc-world-cup-evo",
-  "scott-ransom-rc",
-  "scott-foil-rc-ultimate",
-];
-export const destacados: Producto[] = slugsDestacados.flatMap((s) =>
-  categorias.flatMap((c) => c.productos.filter((p) => p.slug === s)),
-);
+export function buscarProducto(slug: string): { producto: Producto; categoria: Categoria } | undefined {
+  for (const categoria of categorias) {
+    const producto = categoria.productos.find((p) => p.slug === slug);
+    if (producto) return { producto, categoria };
+  }
+  return undefined;
+}
 
-/** Todavía no hay precios cargados. */
+/** Productos que se muestran en la home. */
+const slugsDestacados = ["scott-contrail-10", "scott-contrail-20", "scott-contessa-active-40", "scott-aspect-960"];
+export const destacados: Producto[] = slugsDestacados.flatMap((s) => {
+  const encontrado = buscarProducto(s);
+  return encontrado ? [encontrado.producto] : [];
+});
+
+/** Modelo que aparece en grande en la home. */
+export const SLUG_MODELO_DESTACADO = "scott-contrail-10";
+
 export const PRECIO_PENDIENTE = "$ [PRECIO]";
+
+export function formatearPrecio(precio: number | null): string {
+  return precio === null ? PRECIO_PENDIENTE : `$ ${precio.toLocaleString("es-AR")}`;
+}

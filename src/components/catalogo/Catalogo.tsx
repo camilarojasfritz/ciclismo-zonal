@@ -5,7 +5,7 @@ import ProductCard from "@/components/ProductCard";
 import type { Categoria } from "@/data/catalogo";
 import { linkWhatsApp, mensajes } from "@/lib/whatsapp";
 
-type Orden = "destacados" | "nombre";
+type Orden = "destacados" | "nombre" | "precio-asc" | "precio-desc";
 
 const titulo = "mb-2.5 font-display text-xs font-bold uppercase tracking-[0.16em] text-white";
 const opcion = "flex min-h-9 cursor-pointer items-center gap-3 text-base text-[#e4e5e8]";
@@ -15,12 +15,18 @@ const campo =
 
 /**
  * Pestañas, filtros y grilla de una categoría.
- * Hoy filtran de verdad las pestañas y la marca. Precio, stock y los filtros
- * propios de cada categoría están dibujados pero todavía no tienen datos detrás.
+ * Filtran de verdad las pestañas, la marca y el orden. Las pestañas y las marcas
+ * salen de los productos cargados: si no hay productos de un tipo, no aparece.
+ * Precio, stock y los filtros propios de cada categoría están dibujados pero
+ * todavía no tienen datos detrás.
  */
 export default function Catalogo({ categoria }: { categoria: Categoria }) {
   const id = useId();
   const todos = categoria.tipos[0];
+  const tiposConProductos = categoria.tipos.filter((t, i) => i === 0 || categoria.productos.some((p) => p.tipo === t));
+  // con un solo tipo de producto, las pestañas no aportan nada
+  const mostrarPestanas = tiposConProductos.length > 2;
+  const marcasDisponibles = [...new Set(categoria.productos.map((p) => p.marca))].sort((a, b) => a.localeCompare(b, "es"));
   const [tipo, setTipo] = useState(todos);
   const [marcas, setMarcas] = useState<string[]>([]);
   const [orden, setOrden] = useState<Orden>("destacados");
@@ -31,7 +37,15 @@ export default function Catalogo({ categoria }: { categoria: Categoria }) {
     const lista = categoria.productos.filter(
       (p) => (tipo === todos || p.tipo === tipo) && (marcas.length === 0 || marcas.includes(p.marca)),
     );
-    return orden === "nombre" ? [...lista].sort((a, b) => a.nombre.localeCompare(b.nombre, "es")) : lista;
+    if (orden === "nombre") return [...lista].sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+    if (orden === "precio-asc" || orden === "precio-desc") {
+      const signo = orden === "precio-asc" ? 1 : -1;
+      // los productos sin precio van siempre al final
+      return [...lista].sort((a, b) =>
+        a.precio === null ? (b.precio === null ? 0 : 1) : b.precio === null ? -1 : signo * (a.precio - b.precio),
+      );
+    }
+    return lista;
   }, [categoria.productos, tipo, todos, marcas, orden]);
 
   const hayFiltros = tipo !== todos || marcas.length > 0;
@@ -44,8 +58,9 @@ export default function Catalogo({ categoria }: { categoria: Categoria }) {
 
   return (
     <>
+      {mostrarPestanas && (
       <div role="group" aria-label="Tipo de producto" className="flex flex-wrap gap-2.5">
-        {categoria.tipos.map((t) => (
+        {tiposConProductos.map((t) => (
           <button
             key={t}
             type="button"
@@ -59,6 +74,7 @@ export default function Catalogo({ categoria }: { categoria: Categoria }) {
           </button>
         ))}
       </div>
+      )}
 
       <div className="mt-10 flex flex-wrap items-center justify-between gap-x-6 gap-y-3.5 border-t border-linea pt-6">
         <p aria-live="polite" className="font-display text-xs font-bold uppercase tracking-[0.16em]">
@@ -86,6 +102,8 @@ export default function Catalogo({ categoria }: { categoria: Categoria }) {
             className="min-h-[46px] rounded-[10px] border border-linea bg-grafito px-3.5 text-[15px] text-white"
           >
             <option value="destacados">Destacados</option>
+            <option value="precio-asc">Menor precio</option>
+            <option value="precio-desc">Mayor precio</option>
             <option value="nombre">Nombre A–Z</option>
           </select>
         </label>
@@ -100,15 +118,17 @@ export default function Catalogo({ categoria }: { categoria: Categoria }) {
             </button>
           </div>
 
+          {marcasDisponibles.length > 1 && (
           <fieldset className="flex flex-col gap-1.5 border-t border-linea py-5">
             <legend className={`float-left w-full ${titulo}`}>Marca</legend>
-            {categoria.marcas.map((m) => (
+            {marcasDisponibles.map((m) => (
               <label key={m} className={opcion}>
                 <input type="checkbox" className={casilla} checked={marcas.includes(m)} onChange={() => alternarMarca(m)} />
                 {m}
               </label>
             ))}
           </fieldset>
+          )}
 
           {/* A partir de acá, filtros sin datos todavía (ver comentario del componente) */}
           <fieldset className="flex flex-col gap-1.5 border-t border-linea py-5">

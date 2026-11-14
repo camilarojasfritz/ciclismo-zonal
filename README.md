@@ -25,6 +25,7 @@ npm run dev      # levanta el sitio en http://localhost:3000
 ```
 public/
 ├── logo.png             # Logo del local
+├── bicis/               # Fotos de las bicicletas (Tienda Scott)
 ├── local/               # Fotos del local
 └── demo/                # Fotos PROVISORIAS (ver nota abajo)
 src/
@@ -33,6 +34,7 @@ src/
 │   ├── page.tsx                    # Inicio (/)
 │   ├── catalogo/[categoria]/       # /catalogo/bicicletas, /repuestos, /accesorios, /indumentaria
 │   ├── buscar/                     # /buscar: buscador de productos
+│   ├── producto/[slug]/            # Ficha de cada producto
 │   ├── carrito/                    # /carrito: pedido completo que se envía por WhatsApp
 │   ├── taller/                     # /taller: servicios, pasos, pedido de turno y preguntas
 │   ├── globals.css                 # Colores y tipografías (tokens de Tailwind)
@@ -61,7 +63,8 @@ src/
 - **Fotos de `public/taller/`:** no son del local y no se conoce su licencia. Hay que confirmar que se pueden usar o cambiarlas por fotos del taller real.
 - **Taller:** los cuatro servicios y sus precios son los que pasó el local. Falta qué incluye cada uno, las demoras y las respuestas de las preguntas frecuentes (`src/data/taller.ts`).
 - **Logo:** `public/logo.png` es una captura ampliada; falta el archivo original en buena calidad.
-- **Precios, productos y servicios:** son de ejemplo (`src/data/`). Los productos salen del catálogo internacional de Scott y Syncros, no del stock del local.
+- **Bicicletas:** son los seis modelos que vende el local. Precios y fotos de referencia tomados de Tienda Scott: confirmar con el local.
+- **Repuestos, accesorios e indumentaria:** siguen siendo ejemplos del catálogo internacional de Scott y Syncros, sin precio (`src/data/catalogo.ts`).
 - **Filtros del catálogo:** funcionan las pestañas, la marca y el orden. Precio, stock y los filtros propios de cada categoría están dibujados pero todavía no filtran.
 - **Horarios:** tomados del sitio anterior, sin confirmar (`src/lib/site.ts`). El WhatsApp sí está confirmado.
 
